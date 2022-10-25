@@ -21,7 +21,7 @@ public class Display extends JPanel implements MemoryObserver {
 		setBackground(new Color(46, 49, 50));
 		label = new JLabel(Memory.getInstance().getPresentText());
 		label.setForeground(Color.WHITE);
-		label.setFont(new Font("courier", Font.PLAIN, 24));
+		label.setFont(new Font("nadeem", Font.PLAIN, 26));
 		
 		setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 25));
 		

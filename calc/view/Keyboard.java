@@ -14,9 +14,9 @@ import calc.model.Memory;
 @SuppressWarnings("serial")
 public class Keyboard extends JPanel implements ActionListener {
 	
-	private final Color DARK_GRAY = new Color(68, 68, 68);
-	private final Color LIGHT_GRAY = new Color(97, 100, 99);
-	private final Color ORANGE = new Color(242, 163, 60);
+	private final Color DARK_GRAY = new Color(92, 93, 93);
+	private final Color ALMOST_BLACK = new Color(14, 8, 8);
+	private final Color LIGHT_GRAY = new Color(144, 146, 149);
 	
 	public Keyboard() {
 		
@@ -30,35 +30,34 @@ public class Keyboard extends JPanel implements ActionListener {
 		
 		// FIRST LINE
 		gbc.gridwidth = 2;
-		addButton("AC", DARK_GRAY, gbc, 0 , 0);
+		addButton("AC", ALMOST_BLACK, gbc, 0 , 0);
 		gbc.gridwidth = 1;
 		addButton("±", DARK_GRAY, gbc, 2 , 0);
-		addButton("÷", ORANGE, gbc, 3 , 0);
+		addButton("÷", DARK_GRAY, gbc, 3 , 0);
 		
 		// SECOND LINE
 		addButton("7", LIGHT_GRAY, gbc, 0 , 1);
 		addButton("8", LIGHT_GRAY, gbc, 1 , 1);
 		addButton("9", LIGHT_GRAY, gbc, 2 , 1);
-		addButton("*", ORANGE, gbc, 3 , 1);
+		addButton("*", DARK_GRAY, gbc, 3 , 1);
 		
 		// THIRD LINE
 		addButton("4", LIGHT_GRAY, gbc, 0 , 2);
 		addButton("5", LIGHT_GRAY, gbc, 1 , 2);
 		addButton("6", LIGHT_GRAY, gbc, 2 , 2);
-		addButton("-", ORANGE, gbc, 3 , 2);
+		addButton("-", DARK_GRAY, gbc, 3 , 2);
 		
 		// FOURTH LINE
 		addButton("1", LIGHT_GRAY, gbc, 0 , 3);
 		addButton("2", LIGHT_GRAY, gbc, 1 , 3);
 		addButton("3", LIGHT_GRAY, gbc, 2 , 3);
-		addButton("+", ORANGE, gbc, 3 , 3);
+		addButton("+", DARK_GRAY, gbc, 3 , 3);
 		
 		// FIFTH LINE
-		gbc.gridwidth = 2;
 		addButton("0", LIGHT_GRAY, gbc, 0 , 4);
-		gbc.gridwidth = 1;
+		addButton("%", LIGHT_GRAY, gbc, 1 , 4);
 		addButton(",", LIGHT_GRAY, gbc, 2 , 4);
-		addButton("=", ORANGE, gbc, 3 , 4);
+		addButton("=", DARK_GRAY, gbc, 3 , 4);
 	}
 
 	private void addButton(String text, Color color, GridBagConstraints gbc, int x, int y) {

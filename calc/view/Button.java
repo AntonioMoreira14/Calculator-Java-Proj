@@ -15,6 +15,6 @@ public class Button extends JButton {
 		setBackground(color);
 		setForeground(Color.WHITE);
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		setFont(new Font("courier", Font.PLAIN, 25));
+		setFont(new Font("nadeem", Font.PLAIN, 25));
 	}
 }

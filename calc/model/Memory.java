@@ -6,7 +6,7 @@ import java.util.List;
 public class Memory {
 	
 	private enum TypeCommand {
-		CLEAR, SIGN, NUMBER, DIVISION, MULTIPLICATION, SUM, SUBTRACTION, COMMA, EQUALS;
+		CLEAR, SIGN, PERCENT, NUMBER, DIVISION, MULTIPLICATION, SUM, SUBTRACTION, COMMA, EQUALS;
 	}
 	
 	private static final Memory instance = new Memory();
@@ -48,6 +48,30 @@ public class Memory {
 		} else if(type == TypeCommand.NUMBER || type == TypeCommand.COMMA) {
 			initText = substitute ? value : initText + value;
 			substitute = false;
+		} else if(type == TypeCommand.PERCENT) {
+			double percentNumber1 = Double.parseDouble(initText.replace(",", "."));
+			double total;
+				if(lastOp == TypeCommand.SUM) {
+					double percentNumber2 = Double.parseDouble(bufferText.replace(",", "."));
+					total = percentNumber2 + (percentNumber2 * (percentNumber1 / 100));
+					String percentStr1 = Double.toString(total).replace(".", ",");
+					boolean wholeNum = percentStr1.endsWith(",0");
+					initText = wholeNum ? percentStr1.replace(",0", "") : percentStr1;
+					substitute = false;
+					lastOp = null;
+				} else if(lastOp == TypeCommand.SUBTRACTION) {
+					double percentNumber2 = Double.parseDouble(bufferText.replace(",", "."));
+					total = percentNumber2 - (percentNumber2 * (percentNumber1 / 100));
+					String percentStr2 = Double.toString(total).replace(".", ",");
+					boolean wholeNum = percentStr2.endsWith(",0");
+					initText = wholeNum ? percentStr2.replace(",0", "") : percentStr2;
+					substitute = false;
+					lastOp = null;
+				} else {
+					percentNumber1 /= 100;
+					String percentStr1 = Double.toString(percentNumber1);
+					initText = percentStr1;
+				}
 		} else {
 			substitute = true;
 			initText = getResultOfOperation();
@@ -77,7 +101,7 @@ public class Memory {
 			result = numberBuffer * numberActual;
 		} else if(lastOp == TypeCommand.DIVISION) {
 			result = numberBuffer / numberActual;
-		} 
+		}
 		
 		String resultStr = Double.toString(result).replace(".", ",");
 		boolean wholeNum = resultStr.endsWith(",0");
@@ -91,7 +115,7 @@ public class Memory {
 		}
 		
 		try {
-			Integer.parseInt(value);
+			Double.parseDouble(value);
 			return TypeCommand.NUMBER;
 		} catch (NumberFormatException e) {
 			// When it's not a number...
@@ -111,6 +135,8 @@ public class Memory {
 				return TypeCommand.COMMA;
 			} else if("±".equals(value)) {
 				return TypeCommand.SIGN;
+			} else if("%".equals(value) && !initText.contains("%")) {
+				return TypeCommand.PERCENT;
 			}
 				
 			return null;
